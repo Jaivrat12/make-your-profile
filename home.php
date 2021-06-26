@@ -16,21 +16,39 @@
 
     $stmt = $pdo -> query('SELECT * FROM users ORDER BY id');
     $users = $stmt -> fetchAll(\PDO::FETCH_ASSOC);
-
     // print_r($users);
 ?>
 
 <?php include 'templates/header.php' ?>
 
+    <h1 class="home-heading">Registered Users</h1>
+
     <div class="users">
         <?php foreach($users as $user): ?>
-            <div class="user">
-                <?php echo htmlspecialchars($user['username']); ?>
-                <?php if($user['is_admin']): ?>
-                    <span>Admin</span>
-                <?php endif; ?>
-                <?php echo htmlspecialchars($user['created_at']); ?>
-            </div>
+            <?php $name = htmlspecialchars($user['name'] ?? $user['username']); ?>
+            <a href=<?php echo "profile.php?user=" . htmlspecialchars($user['username']); ?>
+               class="user" title="<?php echo $name; ?>"
+            >
+                <div class="profile-pic">
+                    <?php echo strtoupper($name[0]); ?>
+                </div>
+                <div class="profile-info">
+                    <span class="name">
+                        <?php echo $name; ?>
+                    </span>
+                    <span class="username">
+                        <?php echo '@' . htmlspecialchars($user['username']); ?>
+                    </span>
+                    <div class="roles">
+                        <?php if($user['is_admin']): ?>
+                            <span class="role role-admin">Admin</span>
+                            <span class="role role-god">God</span>
+                        <?php else: ?>
+                            <span class="role">User</span>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </a>
         <?php endforeach; ?>
     </div>
 

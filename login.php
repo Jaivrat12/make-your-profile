@@ -1,5 +1,12 @@
 <?php
 
+    session_start();
+
+    if(isset($_SESSION['currUser'])) {
+
+        header('Location: home.php');
+    }
+
     $username = $password = $error = '';
 
     if(isset($_POST['submit'])) {
@@ -21,7 +28,6 @@
         if($currUser) {
 
             echo "Welcome, {$currUser['username']}!";
-            session_start();
             $_SESSION['currUser'] = $currUser;
             header('Location: home.php');
         }
@@ -29,30 +35,6 @@
 
             $error = "Invalid Credentials!";
         }
-
-        // // Create SQL
-        // $stmt = $pdo -> query("SELECT username, password FROM users");
-        // $credentials = $stmt -> fetchAll(\PDO::FETCH_ASSOC);
-        
-        // // Credentials Validation
-        // $errors = [
-        //     'username' => 'No such username exists!',
-        //     'password' => 'Wrong Password!'
-        // ];
-        // foreach ($credentials as $credential) {
-
-        //     if(!strcasecmp($username, $credential['username'])) {
-
-        //         $errors['username'] = '';
-        //         echo "<br>$password, {$credential['password']}<br>";
-        //         echo $password === $credential['password'];
-        //         if($password === $credential['password']) {
-
-        //             $errors['password'] = '';
-        //             echo "You're now logged in!";
-        //         }
-        //     }
-        // }
     }
 ?>
 

@@ -1,4 +1,4 @@
-/* RESETS */
+/******************************************** RESETS ********************************************/
 * {
 
     margin: 0;
@@ -17,26 +17,31 @@ input {
 }
 
 
-/* STYLES */
+/******************************************** STYLES ********************************************/
+
 body {
 
-    font-family: sans-serif;
+    font-family: Quicksand, sans-serif;
+    font-weight: 500;
     background: #e6e6e6;
-}
-
-nav {
-
-    padding: 0.5rem 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* background: linear-gradient(90deg, #6423a1, #8400ff); */
-    background: white;
     color: #00e096;
 }
 
-.title {
-    font-size: 1.5rem;
+/* Navbar */
+nav {
+
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    /* color: #00e096; */
+}
+
+.header-title {
+
+    font-size: 1.7rem;
+    font-weight: 600;
 }
 
 nav > * {
@@ -45,39 +50,164 @@ nav > * {
     align-items: center;
 }
 
-nav a {
+nav .link-btn {
 
     padding: 0.4rem 0.6rem;
     border-radius: 0.5rem;
-    font-size: 1.1rem;
     border: 2px solid #00e096;
+    font-size: 1.1rem;
     /* background: linear-gradient(90deg, #00f3cb, #b3ff00);
     box-shadow: 1px 1px 4px grey; */
-    color: #00e096;
 }
 
+/* Home Page */
+.home-heading {
+
+    margin-top: 2rem;
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    /* color: #2fce99; */
+    color: #606060;
+}
+
+.users {
+
+    margin: 2rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.user {
+
+    margin: 0.3rem;
+    padding: 0.5rem;
+    min-width: 200px;
+    width: 20%;
+    /* max-width: 300px; */
+    /* height: 100%; */
+    display: flex;
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    border-radius: 0.75rem;
+    background: white;
+    overflow: hidden;
+}
+
+.divider {
+
+    margin: 0 1rem;
+    height: 100%;
+    width: 0;
+    border-color: #00e09528;
+}
+
+.profile-pic {
+
+    margin-right: 1rem;
+    height: 2.25rem;
+    width: 2.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    background: #00e096;
+    color: white;
+}
+
+.profile-info {
+
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-info .name {
+
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: black;
+    /* color: #00c583; */
+    text-transform: capitalize;
+}
+
+.profile-info .username {
+
+    font-size: 0.9rem;
+    color: grey;
+    /* color: #8ed6b8; */
+    /* color: #00e096; */
+}
+
+.roles {
+
+    margin-top: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+    font-size: 0.85rem;
+}
+
+.role {
+
+    margin: 0 0.25rem 0.25rem 0;
+    padding: 0.1rem 0.4rem 0.2rem 0.3rem;
+    display: flex;
+    align-items: center;
+    border-radius: 24px;
+    /* background: grey; */
+    /* background: #ff6600; */
+    /* background: #1bd0dd; */
+    /* background: #09dceb; */
+    /* background: #0099ff; */
+    background: #2dabff;
+}
+
+.role::before {
+
+    margin: 0.1rem 0.25rem 0 0;
+    content: '';
+    display: block;
+    height: 0.75rem;
+    width: 0.75rem;
+    border-radius: 50%;
+    background: white;
+}
+
+.role-admin {
+    /* background: crimson; */
+    background: #f1123f;
+}
+
+.role-god {
+    /* background: limegreen; */
+    /* background: #57009e; */
+    background: #9500ff;
+}
+
+/* Registration/Login */
 form {
 
-    /* position: relative; */
     margin: auto;
     margin-top: 4rem;
     padding: 0rem 2rem 2rem;
-    /* padding-top: 0; */
     max-width: 600px;
-    /* height: 400px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 0.5rem;
     background: white;
-    color: #00e096;
+    /* color: #00e096; */
 }
 
 form h1 {
 
     padding: 2rem 0 0;
-    font-weight: 300;
+    font-size: 2.75rem;
+    font-weight: 600;
 }
 
 .form-grp {
@@ -106,7 +236,6 @@ input {
     padding: 0.5rem 0rem;
     border-radius: 0.4rem;
     border: 2px solid;
-    /* border-color: inherit; */
     font-size: 1.1rem;
     text-align: center;
     color: inherit;
@@ -116,7 +245,6 @@ input {
 input[type="submit"] {
 
     margin: auto;
-    /* margin-top: 1rem; */
     width: 40%;
     min-width: fit-content;
     padding: 0.4rem 0.8rem;
@@ -140,7 +268,6 @@ input:hover, input:focus {
 
 hr {
 
-    /* position: absolute; */
     margin: 2rem 0;
     width: 100%;
 }

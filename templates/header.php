@@ -10,19 +10,20 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
 
         <title>User Login System</title>
     </head>
     <body>
         <nav>
-            <div class="title">User Login System</div>
+            <a href="home.php" class="header-title">User Login System</a>
             <div>
                 <?php if($isLoggedIn): ?>
                     <!-- <div>Hello, User</div> -->
-                    <a href="logout.php">LOGOUT</a>
+                    <a class="link-btn" href="logout.php">LOGOUT</a>
                 <?php else: ?>
-                    <a href="login.php">LOGIN</a>
+                    <a class="link-btn" href="login.php">LOGIN</a>
                 <?php endif; ?>
             </div>
         </nav>
