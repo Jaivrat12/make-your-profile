@@ -13,11 +13,13 @@
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
 
-        <title>User Login System</title>
+        <title>
+            <?php echo ($docTitle ?? '') . 'Make Your Profile'; ?>
+        </title>
     </head>
     <body>
         <nav>
-            <a href="home.php" class="header-title">User Login System</a>
+            <a href="home.php" class="header-title">Make Your Profile</a>
             <div>
                 <?php if($isLoggedIn): ?>
                     <!-- <div>Hello, User</div> -->

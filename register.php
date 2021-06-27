@@ -1,5 +1,13 @@
 <?php
 
+    session_start();
+
+    if(isset($_SESSION['currUser'])) {
+
+        header('Location: home.php');
+    }
+
+    $docTitle = 'Register | ';
     $username = $password = '';
     $errors = ['username' => '', 'password' => ''];
 

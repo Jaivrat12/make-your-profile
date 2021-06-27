@@ -7,6 +7,7 @@
         header('Location: home.php');
     }
 
+    $docTitle = 'Login | ';
     $username = $password = $error = '';
 
     if(isset($_POST['submit'])) {
