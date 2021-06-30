@@ -2,83 +2,88 @@
 
     session_start();
 
-    if(isset($_SESSION['currUser'])) {
-
+    if(isset($_SESSION['currUser']))
         header('Location: home.php');
-    }
+
+    include 'db/fields.php';
+    include 'db/sql.php';
+
+    $fields = getFields(['username', 'password']);
 
     $docTitle = 'Register | ';
-    $username = $password = '';
-    $errors = ['username' => '', 'password' => ''];
-
+    $uniqueUsernameError = '';
+    
     if(isset($_POST['submit'])) {
 
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        // Form Validation
-        if(!preg_match('/^[a-zA-Z0-9_]{3,}$/', $username)) {
-            $errors['username'] = "Username must be atleast 3 characters long & should only contain alphanumerics or underscores";
-        }
-        if(!preg_match('/^(?=.{6,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/', $password)) {
-            $errors['password'] = "Password must be atleast 6 chars long & should contain uppercase, lowercase letters & numbers";
-        }
-
-        // INSERT to DB if data is valid
-        if(!array_filter($errors)) {
-
-            // Connect to DB
-            include 'config/db-connect.php';
-
-            // Create SQL
-            $sql = "INSERT INTO users(username, password) VALUES('$username', '$password')";
-
-            // Save to DB & check for success
-            $stmt = $pdo->prepare($sql);
-            if($stmt->execute()) {
-
-                header('Location: home.php');
+        $isValid = true;
+        $userCredentials = '';
+        foreach($fields as $field) {
+    
+            $field -> value = $field -> name == 'password' ? $_POST[$field -> name] : trim($_POST[$field -> name]);
+            $userCredentials .= $userCredentials ? ', ' : '';
+            $userCredentials .= "'{$field -> value}'";
+    
+            if(!($field -> validate())) {
+                $isValid = false;
             }
-            else {
+        }
 
+        if(getUser($fields['username'] -> value)) {
+
+            $uniqueUsernameError = 'This username has already been taken!';
+            $isValid = false;
+        }
+
+        if($isValid) {
+
+            if(insertUser($userCredentials))
+                header('Location: login.php');
+            else
                 echo 'Something went wrong!';
-            }
         }
     }
 ?>
 
 <?php include 'templates/header.php'; ?>
+
     <form action="register.php" method="POST">
+
         <h1>REGISTRATION</h1>
-        <div class="form-grp">
-            <label>Username</label>
-            <input
-                type="text" name="username"
-                placeholder="Username"
-                autofocus required
-                value= "<?php echo htmlspecialchars($username); ?>"
-            >
-            <div class="error">
-                <?php echo $errors['username'] ?>
+
+        <div class="error">
+            <?php echo $uniqueUsernameError; ?>
+        </div>
+
+        <?php foreach($fields as $field): ?>
+
+            <div class="form-grp">
+
+                <label>
+                    <?php echo "{$field -> name} (max: {$field -> maxLen} chars.)"; ?>
+                </label>
+                
+                <input
+                    type="<?php echo $field -> type; ?>"
+                    name="<?php echo $field -> name; ?>"
+                    value="<?php echo $field -> value; ?>"
+                    <?php if($field -> name == 'username'): ?>
+                        autofocus
+                    <?php endif; ?>
+                    required
+                >
+
+                <div class="error">
+                    <?php echo $field -> isError ? $field -> errorMsg : ''; ?>
+                </div>
+
             </div>
-        </div>
+
+        <?php endforeach; ?>
+
         <div class="form-grp">
-            <label>Password</label>
-            <input
-                type="password" name="password"
-                placeholder="Password"
-                required
-                value= "<?php echo htmlspecialchars($password); ?>"
-            >
-            <div class="error">
-                <?php echo $errors['password'] ?>
-            </div>
+            <input type="submit" name="submit" value="Register" />
         </div>
-        <div class="form-grp">
-            <input
-                type="submit" name="submit"
-                value="Register"
-            >
-        </div>
+
     </form>
+
 <?php include 'templates/footer.php'; ?>

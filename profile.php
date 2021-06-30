@@ -2,23 +2,43 @@
 
     session_start();
 
-    if(!isset($_GET['user'])) {
-
+    if(!isset($_GET['user']))
         header('Location: home.php');
-    }
-    
+
+    include 'db/sql.php';
+
     $username = $_GET['user'];
-
     $docTitle = "Profile - $username | ";
+    $user = getUser($username);
+    if($user) $name = $user['name'] ?? $user['username'];
 
-    include 'config/db-connect.php';
-    $stmt = $pdo -> query("SELECT * FROM users WHERE username = '$username'");
-    $user = $stmt -> fetch(\PDO::FETCH_ASSOC);
+    $sameUser = false;
+    $adminView = false;
+    if(isset($_SESSION['currUser'])) {
 
-    if($user)
-        $name = htmlspecialchars($user['name'] ?? $user['username']);
-    
-    $details = ['age', 'gender', 'email', 'location'];
+        $sameUser = $_SESSION['currUser']['username'] == $user['username'];
+        $adminView = $_SESSION['currUser']['is_admin'];
+    }
+
+    $details = ['age', 'gender', 'email', 'location', 'joined'];
+
+    if(isset($_POST['delete'])) {
+
+        if($sameUser || $adminView) {
+
+            if(deleteUser($username)) {
+
+                if($sameUser) header('Location: logout.php');
+                else header('Location: home.php');
+            }
+            else echo 'Something went wrong!';
+        }
+        else {
+
+            echo "You're NOT authourized to Delete this User!";
+            exit();
+        }
+    }
 ?>
 
 <?php include 'templates/header.php'; ?>
@@ -37,7 +57,7 @@
                         <?php echo $name; ?>
                     </h1>
                     <div class="username">
-                        <?php echo '@' . htmlspecialchars($user['username']); ?>
+                        <?php echo '@' . $user['username']; ?>
                     </div>
                 </div>
                 <div class="roles">
@@ -50,28 +70,58 @@
                 </div>
             </div>
 
+            <?php if($sameUser || $adminView): ?>
+
+                <div class="control-panel">
+                    <h3>Control Panel</h3>
+                    <div class="audit">
+                        
+                        <?php if($sameUser): ?>
+                            <form action="edit-profile.php" method="POST">
+                                <input type="hidden" name="username" value="<?php echo $user['username']; ?>">
+                                <input type="submit" name="edit" value="Edit">
+                            </form>
+                        <?php endif; ?>
+
+                        <form
+                            action="<?php echo "profile.php?user={$user['username']}"; ?>"
+                            method="POST"
+                        >
+                            <input type="hidden" name="username" value="<?php echo $user['username']; ?>">
+                            <input type="submit" name="delete" value="Delete">
+                        </form>
+                    </div>
+                </div>
+
+            <?php endif; ?>
+
             <div class="about">
                 <h3>About</h3>
-                <p><?php echo htmlspecialchars($user['about']); ?></p>
+                <p><?php echo $user['about']; ?></p>
             </div>
 
             <div class="details-wrapper">
-
                 <h3>Details</h3>
+                <?php if($adminView || $sameUser || $user['is_public']): ?>
 
-                <?php foreach($details as $detail): ?>
+                    <?php foreach($details as $detail): ?>
 
-                    <div>
-                        <span class="detail-heading">
-                            <?php echo $detail . ': '; ?>
-                        </span>
-                        <span class="detail-value">
-                            <?php echo htmlspecialchars($user[$detail]); ?>
-                        </span>
-                    </div>
+                        <div>
+                            <span class="detail-heading">
+                                <?php echo $detail . ': '; ?>
+                            </span>
+                            <span class="detail-value">
+                                <?php echo $user[$detail]; ?>
+                            </span>
+                        </div>
 
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
 
+                <?php else: ?>
+
+                    <em>Details of this user are private</em>
+
+                <?php endif; ?>
             </div>
 
         </div>

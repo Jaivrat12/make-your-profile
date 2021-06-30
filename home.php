@@ -12,12 +12,14 @@
     $currUser = $_SESSION['currUser'] ?? null;
     // print_r($currUser);
 
-    include 'config/db-connect.php';
+    include 'db/db-connect.php';
 
     $stmt = $pdo -> query('SELECT * FROM users ORDER BY id');
     $users = $stmt -> fetchAll(\PDO::FETCH_ASSOC);
-    // print_r($users);
 ?>
+
+<!-- User Profile in header -->
+<!-- Logout in Control Panel -->
 
 <?php include 'templates/header.php' ?>
 
@@ -25,8 +27,10 @@
 
     <div class="users">
         <?php foreach($users as $user): ?>
-            <?php $name = htmlspecialchars($user['name'] ?? $user['username']); ?>
-            <a href=<?php echo "profile.php?user=" . htmlspecialchars($user['username']); ?>
+
+            <?php $name = $user['name'] ?? $user['username']; ?>
+
+            <a href=<?php echo "profile.php?user={$user['username']}"; ?>
                class="user" title="<?php echo $name; ?>"
             >
                 <div class="profile-pic">
@@ -37,7 +41,7 @@
                         <?php echo $name; ?>
                     </span>
                     <span class="username">
-                        <?php echo '@' . htmlspecialchars($user['username']); ?>
+                        <?php echo "@{$user['username']}"; ?>
                     </span>
                     <div class="roles">
                         <?php if($user['is_admin']): ?>
@@ -49,6 +53,7 @@
                     </div>
                 </div>
             </a>
+
         <?php endforeach; ?>
     </div>
 

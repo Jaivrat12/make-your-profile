@@ -12,7 +12,7 @@ a {
     text-decoration: none;
 }
 
-input {
+input, textarea {
     outline: none;
 }
 
@@ -182,8 +182,7 @@ nav .link-btn {
 /* Registration/Login Page */
 form {
 
-    margin: auto;
-    margin-top: 4rem;
+    margin: 4rem auto;
     padding: 0rem 2rem 2rem;
     max-width: 600px;
     display: flex;
@@ -220,18 +219,26 @@ label {
     font-size: 0.95rem;
     font-weight: 600;
     color: #45b690;
+    text-transform: capitalize;
 }
 
-input {
+input:not(input[type="checkbox"]), textarea {
 
     width: 100%; 
-    padding: 0.5rem 0rem;
+    padding: 0.5rem;
     border-radius: 0.4rem;
     border: 2px solid;
     font-size: 1.1rem;
     text-align: center;
     color: inherit;
-    transition: box-shadow 0.15s;
+    transition: box-shadow 0.15s, background-color 0.3s;
+}
+
+textarea {
+
+    font-family: Quicksand, sans-serif;
+    font-weight: 600;
+    text-align: left;
 }
 
 input[type="submit"] {
@@ -241,12 +248,13 @@ input[type="submit"] {
     min-width: fit-content;
     padding: 0.4rem 0.8rem;
     background: #00e096;
-    border-color: #00e096;
-    color: white;
+    border-color: #00e096 !important;
+    color: white !important;
     cursor: pointer;
 }
 
-input:hover, input:focus {
+input:hover, input:focus,
+textarea:hover, textarea:focus {
     box-shadow: 0px 0px 5px #acacacda;
 }
 
@@ -349,7 +357,7 @@ hr {
     justify-content: center;
 }
 
-.about, .details-wrapper {
+.control-panel, .about, .details-wrapper {
 
     margin: 1rem 0;
     padding: 1rem 2rem;
@@ -360,11 +368,28 @@ hr {
     /* color: #888888; */
 }
 
-.about h3, .details-wrapper h3 {
+.control-panel h3, .about h3, .details-wrapper h3 {
 
     margin-bottom: 0.75rem;
     font-size: 1.5rem;
     color: #45b690;
+}
+
+.control-panel .audit {
+    display: flex;
+}
+
+.control-panel form {
+
+    margin: 0 0.5rem 0 0;
+    padding: 0;
+    max-width: none;
+}
+
+.control-panel input[name="delete"] {
+
+    background: #ff1332;
+    border-color: #ff1332 !important;
 }
 
 .details-wrapper {
@@ -376,4 +401,39 @@ hr {
     font-weight: 700;
     color: #505050;
     text-transform: capitalize;
+}
+
+/* Profile Edit Page */
+.multi-submit {
+    flex-direction: row;
+}
+
+.multi-submit input {
+    margin: 0 1rem;
+}
+
+input[value="Save"] {
+
+    border-color: #2dabff !important;
+    background: white;
+    color: #2dabff !important;
+}
+
+input[value="Save"]:hover {
+
+    background: #2dabff;
+    color: white !important;
+}
+
+input[value="Cancel"] {
+
+    border-color: #f1123f !important;
+    background: white;
+    color: #f1123f !important;
+}
+
+input[value="Cancel"]:hover {
+
+    background: #f1123f;
+    color: white !important;
 }
