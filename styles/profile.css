@@ -124,4 +124,7 @@
     .profile-pic-wrapper .roles {
         bottom: 0.75rem;
     }
+    .control-panel, .about, .details-wrapper {
+        padding: 1rem;
+    }
 }
