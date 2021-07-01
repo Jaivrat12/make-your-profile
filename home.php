@@ -8,14 +8,16 @@
     */
 
     session_start();
-
     $currUser = $_SESSION['currUser'] ?? null;
-    // print_r($currUser);
 
     include 'db/db-connect.php';
+    include 'db/sql.php';
+    include 'db/user-activity.php';
 
     $stmt = $pdo -> query('SELECT * FROM users ORDER BY id');
     $users = $stmt -> fetchAll(\PDO::FETCH_ASSOC);
+
+    $currTime = time();
 ?>
 
 <?php include 'templates/header.php' ?>
@@ -39,6 +41,13 @@
                     </span>
                     <span class="username">
                         <?php echo "@{$user['username']}"; ?>
+                    </span>
+                    <span class="status">
+                        <?php if($currTime - $user['last_activity'] < 60 * 5): ?>
+                            <span class="online">online</span>
+                        <?php else: ?>
+                            <span class="offline">offline</span>
+                        <?php endif; ?>
                     </span>
                     <div class="roles">
                         <?php if($user['is_admin']): ?>

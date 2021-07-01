@@ -7,6 +7,7 @@
 
     include 'db/fields.php';
     include 'db/sql.php';
+    include 'db/user-activity.php';
 
     // Refresh Current User Data
     $_SESSION['currUser'] = getUser($_SESSION['currUser']['username']);

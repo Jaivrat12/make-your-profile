@@ -6,6 +6,11 @@
         header('Location: home.php');
 
     include 'db/sql.php';
+    include 'db/user-activity.php';
+
+    // Refresh Current User Data
+    if(isset($_SESSION['currUser']))
+        $_SESSION['currUser'] = getUser($_SESSION['currUser']['username']);
 
     $username = $_GET['user'];
     $docTitle = "Profile - $username | ";
@@ -20,6 +25,7 @@
         $adminView = $_SESSION['currUser']['is_admin'];
     }
 
+    $currTime = time();
     $details = ['age', 'gender', 'email', 'location', 'joined'];
 
     if(isset($_POST['delete'])) {
@@ -60,13 +66,22 @@
                         <?php echo '@' . $user['username']; ?>
                     </div>
                 </div>
-                <div class="roles">
-                    <?php if($user['is_admin']): ?>
-                        <span class="role role-admin">Admin</span>
-                        <span class="role role-god">God</span>
-                    <?php else: ?>
-                        <span class="role">User</span>
-                    <?php endif; ?>
+                <div class="roles-and-status">
+                    <div class="status">
+                        <?php if($currTime - $user['last_activity'] < 60 * 5): ?>
+                            <span class="online">online</span>
+                        <?php else: ?>
+                            <span class="offline">offline</span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="roles">
+                        <?php if($user['is_admin']): ?>
+                            <span class="role role-admin">Admin</span>
+                            <span class="role role-god">God</span>
+                        <?php else: ?>
+                            <span class="role">User</span>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
 

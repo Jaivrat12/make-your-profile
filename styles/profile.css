@@ -47,12 +47,22 @@
     font-size: 1.1rem;
 }
 
-.profile-pic-wrapper .roles {
+.profile-pic-wrapper .roles-and-status {
 
     position: absolute;
-    bottom: 1.75rem;
+    bottom: 1rem;
     width: 100%;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.profile-pic-wrapper .online::before,
+.profile-pic-wrapper .offline::before {
+    
+    position: absolute;
+    right: 100%;
 }
 
 .control-panel, .about, .details-wrapper {
@@ -121,10 +131,28 @@
         border-width: 0.25rem;
         font-size: 4rem;
     }
-    .profile-pic-wrapper .roles {
-        bottom: 0.75rem;
+    .profile-info-wrapper .profile-name {
+
+        font-size: 1.7rem;
+    }
+    .profile-info-wrapper .username {
+
+        margin-top: -0.25rem;
+        font-size: 0.9rem;
+    }
+    .profile-pic-wrapper .roles-and-status {
+        bottom: 0.25rem;
+    }
+    .profile-pic-wrapper .roles-and-status .status {
+        margin: 0 0 0.3rem;
+    }
+    .profile-pic-wrapper .roles-and-status .roles {
+        margin: 0;
     }
     .control-panel, .about, .details-wrapper {
         padding: 1rem;
+    }
+    .control-panel h3, .about h3, .details-wrapper h3 {
+        font-size: 1.25rem;
     }
 }

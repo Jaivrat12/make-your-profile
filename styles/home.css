@@ -51,6 +51,47 @@
     color: grey;
 }
 
+.status {
+
+    margin: 0.5rem 0 -0.5rem;
+    display: flex;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status > * {
+
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.online {
+    color: lime;
+}
+
+.offline {
+    color: #808080;
+}
+
+.online::before, .offline::before, .role::before {
+
+    margin: 0.1rem 0.25rem 0 0;
+    content: '';
+    display: block;
+    height: 0.6rem;
+    width: 0.6rem;
+    border-radius: 50%;
+}
+
+.online::before {
+    background: lime;
+}
+
+.offline::before {
+    background: #808080;
+}
+
 .roles {
 
     margin-top: 1.25rem;
@@ -72,12 +113,8 @@
 
 .role::before {
 
-    margin: 0.1rem 0.25rem 0 0;
-    content: '';
-    display: block;
     height: 0.75rem;
     width: 0.75rem;
-    border-radius: 50%;
     background: white;
 }
 
