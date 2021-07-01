@@ -18,9 +18,6 @@
     $users = $stmt -> fetchAll(\PDO::FETCH_ASSOC);
 ?>
 
-<!-- User Profile in header -->
-<!-- Logout in Control Panel -->
-
 <?php include 'templates/header.php' ?>
 
     <h1 class="home-heading">Registered Users</h1>

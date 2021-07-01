@@ -1,0 +1,100 @@
+.home-heading {
+
+    margin-top: 2rem;
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    color: #606060;
+}
+
+.users {
+
+    margin: 2rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.user {
+
+    margin: 0.3rem;
+    padding: 0.5rem;
+    min-width: 200px;
+    width: 20%;
+    display: flex;
+    border-radius: 0.75rem;
+    background: white;
+    overflow: hidden;
+}
+
+.user .profile-pic {
+    margin-right: 1rem;
+}
+
+.user .profile-info {
+
+    display: flex;
+    flex-direction: column;
+}
+
+.user .profile-info .name {
+
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: black;
+    text-transform: capitalize;
+}
+
+.user .profile-info .username {
+
+    font-size: 0.9rem;
+    color: grey;
+}
+
+.roles {
+
+    margin-top: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+    font-size: 0.85rem;
+}
+
+.role {
+
+    margin: 0 0.25rem 0.25rem 0;
+    padding: 0.1rem 0.4rem 0.2rem 0.3rem;
+    display: flex;
+    align-items: center;
+    border-radius: 24px;
+    background: #2dabff;
+}
+
+.role::before {
+
+    margin: 0.1rem 0.25rem 0 0;
+    content: '';
+    display: block;
+    height: 0.75rem;
+    width: 0.75rem;
+    border-radius: 50%;
+    background: white;
+}
+
+.role-admin {
+    background: #f1123f;
+}
+
+.role-god {
+    background: #9500ff;
+}
+
+@media only screen and (max-width: 460px) {
+
+    .user {
+        width: 100%;
+    }
+    .home-heading {
+        font-size: 2rem;
+    }
+}

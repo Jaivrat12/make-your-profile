@@ -78,8 +78,10 @@
                         
                         <?php if($sameUser): ?>
                             <form action="edit-profile.php" method="POST">
-                                <input type="hidden" name="username" value="<?php echo $user['username']; ?>">
                                 <input type="submit" name="edit" value="Edit">
+                            </form>
+                            <form action="logout.php">
+                                <input type="submit" name="logout" value="Logout">
                             </form>
                         <?php endif; ?>
 
@@ -87,7 +89,6 @@
                             action="<?php echo "profile.php?user={$user['username']}"; ?>"
                             method="POST"
                         >
-                            <input type="hidden" name="username" value="<?php echo $user['username']; ?>">
                             <input type="submit" name="delete" value="Delete">
                         </form>
                     </div>

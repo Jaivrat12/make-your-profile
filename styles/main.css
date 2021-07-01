@@ -1,0 +1,72 @@
+/******************************************** RESETS ********************************************/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+input, textarea {
+    outline: none;
+}
+
+/******************************************** STYLES ********************************************/
+
+body {
+
+    font-family: Quicksand, sans-serif;
+    font-weight: 500;
+    background: #e6e6e6;
+    color: #00e096;
+}
+
+/* Navbar */
+nav {
+
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+}
+
+.header-title {
+
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+nav .link-btn {
+
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.5rem;
+    border: 2px solid #00e096;
+    font-size: 1.1rem;
+}
+
+.profile-pic {
+
+    height: 2.25rem;
+    width: 2.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    background: #00e096;
+    color: white;
+}
+
+@media only screen and (max-width: 460px) {
+
+    nav {
+        padding: 0.5rem;
+    }
+    .header-title {
+        font-size: 1.5rem;
+    }
+}
