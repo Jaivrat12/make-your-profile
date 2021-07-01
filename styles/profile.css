@@ -14,7 +14,8 @@
 
 .hero-img {
 
-    height: max(15vw, 15vh);
+    min-height: 5rem;
+    height: max(12vw, 12vh);
     background: #00e096;
 }
 
